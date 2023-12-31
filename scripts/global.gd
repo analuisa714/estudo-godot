@@ -10,8 +10,10 @@ var player_start_posx = 0
 var player_start_posy = 0
 
 func finish_changescenes():
+	transition_scene = true
 	if transition_scene == true:
 		transition_scene = false
+		
 		if current_scene == "world":
 			current_scene = "cliff_side"
 		else:
