@@ -447,7 +447,7 @@ wait_time = 0.5
 wait_time = 0.5
 
 [node name="world_camera" type="Camera2D" parent="."]
-position = Vector2(1, -5)
+position = Vector2(1, -3)
 zoom = Vector2(4, 4)
 limit_left = 0
 limit_top = 0
@@ -459,7 +459,16 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="cliffside_camera" type="Camera2D" parent="."]
-position = Vector2(135, 30)
+position = Vector2(1, -2)
+zoom = Vector2(4, 4)
+limit_left = 132
+limit_top = 75
+limit_right = 402
+limit_bottom = 251
+limit_smoothed = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
