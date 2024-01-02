@@ -13,8 +13,7 @@ func finish_changescenes():
 	transition_scene = true
 	if transition_scene == true:
 		transition_scene = false
-		
 		if current_scene == "world":
 			current_scene = "cliff_side"
 		else:
-			current_scene == "world"
+			current_scene = "world"

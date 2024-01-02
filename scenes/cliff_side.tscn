@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc0ofliiyio52"]
+[gd_scene load_steps=11 format=3 uid="uid://dc0ofliiyio52"]
 
 [ext_resource type="Texture2D" uid="uid://d1oknje7vmhum" path="res://art/objects/objects.png" id="1_68uer"]
+[ext_resource type="Script" path="res://scenes/cliff_side.gd" id="1_jnpqk"]
 [ext_resource type="Texture2D" uid="uid://b2kymrb180we6" path="res://art/tilesets/grass.png" id="2_pihjm"]
 [ext_resource type="Texture2D" uid="uid://bj187x121vgb3" path="res://art/tilesets/plains.png" id="3_i3bvo"]
 [ext_resource type="PackedScene" uid="uid://eu1tl2n2nhuo" path="res://scenes/player.tscn" id="4_p6s34"]
@@ -158,8 +159,12 @@ sources/0 = SubResource("TileSetAtlasSource_sibf3")
 sources/1 = SubResource("TileSetAtlasSource_lwaol")
 sources/2 = SubResource("TileSetAtlasSource_ksdh7")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcggg"]
+size = Vector2(81.5, 22.25)
+
 [node name="cliff_side" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_jnpqk")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -175,12 +180,22 @@ layer_2/name = "ysort"
 layer_2/y_sort_enabled = true
 layer_2/tile_data = PackedInt32Array()
 
-[node name="player" parent="." instance=ExtResource("4_p6s34")]
-position = Vector2(270, 238)
-
 [node name="collisions" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions"]
 position = Vector2(175, 64.3706)
 scale = Vector2(1, 1.00858)
 polygon = PackedVector2Array(34, 45.2413, 161, 46, 161, 96, 157, 99, 152, 100, 148, 107, 145, 117, 142, 160.255, 140, 177.11, 62, 176.119, 57, 163.229, 48, 147, 46, 136, 40, 131, 33, 128, 31, 55, 33, 45.2413, 24, 33, -4, 84, -1, 143, 3, 192, 52, 222, 102, 221, 155, 219, 168, 198, 181, 143, 186, 102, 185, 68, 180, 39, 167, 27, 126, 18, 93, 19, 52, 25, 35, 38)
+
+[node name="player" parent="." instance=ExtResource("4_p6s34")]
+position = Vector2(267, 147)
+
+[node name="cliffside_exitpoint" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_exitpoint"]
+y_sort_enabled = true
+position = Vector2(276, 234)
+shape = SubResource("RectangleShape2D_pcggg")
+
+[connection signal="body_entered" from="cliffside_exitpoint" to="." method="_on_cliffside_exitpoint_body_entered"]
+[connection signal="body_exited" from="cliffside_exitpoint" to="." method="_on_cliffside_exitpoint_body_exited"]
