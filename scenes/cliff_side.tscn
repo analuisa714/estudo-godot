@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dc0ofliiyio52"]
 
 [ext_resource type="Texture2D" uid="uid://d1oknje7vmhum" path="res://art/objects/objects.png" id="1_68uer"]
-[ext_resource type="Script" path="res://scenes/cliff_side.gd" id="1_jnpqk"]
+[ext_resource type="Script" path="res://scripts/cliff_side.gd" id="1_jnpqk"]
 [ext_resource type="Texture2D" uid="uid://b2kymrb180we6" path="res://art/tilesets/grass.png" id="2_pihjm"]
 [ext_resource type="Texture2D" uid="uid://bj187x121vgb3" path="res://art/tilesets/plains.png" id="3_i3bvo"]
 [ext_resource type="PackedScene" uid="uid://eu1tl2n2nhuo" path="res://scenes/player.tscn" id="4_p6s34"]
