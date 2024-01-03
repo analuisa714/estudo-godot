@@ -1,0 +1,32 @@
+{
+  "dialogo1": {
+    "dialogo_frase": "Oi, você está perdido?",
+    "dialogo_personagem": "player",
+    "dialogo_sequencia": 1,
+    "dialogo_linguagem": "portugues"
+  },
+  "dialogo2": {
+    "dialogo_frase": "Não, eu moro aqui.",
+    "dialogo_personagem": "skeleton",
+    "dialogo_sequencia": 2,
+    "dialogo_linguagem": "portugues"
+  },
+  "dialogo3": {
+    "dialogo_frase": "Mas eu perdi minhas sementinhas.\nVocê pode me ajudar a encontrar?",
+    "dialogo_personagem": "skeleton",
+    "dialogo_sequencia": 3,
+    "dialogo_linguagem": "portugues"
+  },
+  "dialogo4": {
+    "dialogo_frase": "Sim",
+    "dialogo_personagem": "player",
+    "dialogo_sequencia": 4,
+    "dialogo_linguagem": "portugues"
+  },
+  "dialogo5": {
+    "dialogo_frase": "Não",
+    "dialogo_personagem": "player",
+    "dialogo_sequencia": 4,
+    "dialogo_linguagem": "portugues"
+  }
+}

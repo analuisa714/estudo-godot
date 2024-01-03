@@ -11,6 +11,10 @@ var player_start_posy = 124
 
 var game_first_loadin = true
 
+var found_skeletons_item = false
+var given_skeletons_item = false
+
+
 func finish_changescenes():
 	transition_scene = true
 	if transition_scene == true:
