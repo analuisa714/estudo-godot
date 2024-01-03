@@ -3,6 +3,9 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#print("TESTE")
+	#print(staticData.item_data["dialogo1"]["dialogo_frase"])
+	
 	if global.game_first_loadin == true:
 		$player.position.x = global.player_start_posx
 		$player.position.y = global.player_start_posy
@@ -14,6 +17,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	change_scene()
+	if global.found_skeletons_item == true:
+		$seeds.visible = false
+		
 
 
 func _on_cliffside_transition_point_body_entered(body):

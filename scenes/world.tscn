@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc1stn0dx6jw5"]
+[gd_scene load_steps=10 format=3 uid="uid://dc1stn0dx6jw5"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_oe6oi"]
-[ext_resource type="TileSet" uid="uid://chf4lkr5hxf7h" path="res://scenes/ready_tilesets/world.tres" id="2_gq7mo"]
+[ext_resource type="TileSet" uid="uid://chf4lkr5hxf7h" path="res://art/ready_tilesets/world.tres" id="2_gq7mo"]
 [ext_resource type="PackedScene" uid="uid://eu1tl2n2nhuo" path="res://scenes/player.tscn" id="4_idiw0"]
 [ext_resource type="PackedScene" uid="uid://c6nxcj4d46rkj" path="res://scenes/enemy.tscn" id="5_t8rmh"]
+[ext_resource type="PackedScene" uid="uid://cc0dik57a1yfo" path="res://scenes/skeleton.tscn" id="5_yxi0d"]
+[ext_resource type="Texture2D" uid="uid://v6kgljp57dd5" path="res://art/objects/basic_plants.png" id="6_if6mw"]
 
 [sub_resource type="GDScript" id="GDScript_7artp"]
 script/source = "extends Area2D
@@ -22,6 +24,9 @@ func _process(delta):
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2mlm"]
 size = Vector2(53, 43)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vo3up"]
+radius = 7.0
 
 [node name="world" type="Node2D"]
 y_sort_enabled = true
@@ -45,17 +50,38 @@ position = Vector2(183, 124)
 [node name="enemy" parent="." instance=ExtResource("5_t8rmh")]
 position = Vector2(268, 119)
 
+[node name="skeleton" parent="." instance=ExtResource("5_yxi0d")]
+position = Vector2(125, 96)
+scale = Vector2(0.96, 1)
+
 [node name="collisions" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions"]
 polygon = PackedVector2Array(7, 0, 188, 0, 188, -43, 241, -43, 241, 0, 258, 0, 259, 31, 288, 31, 288, 47, 414, 47, 415, 191, 0, 192, 0, 0, -14, 7, -18, 206, 452, 203, 450, 7, 369, -75, 22, -74, 0, 0)
 
 [node name="cliffside_transition_point" type="Area2D" parent="."]
+position = Vector2(-2, 1)
 script = SubResource("GDScript_7artp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_transition_point"]
-position = Vector2(214.5, -21.5)
+position = Vector2(216, -23)
 shape = SubResource("RectangleShape2D_q2mlm")
+
+[node name="seeds" type="StaticBody2D" parent="."]
+position = Vector2(73, 82)
+
+[node name="Sprite2D" type="Sprite2D" parent="seeds"]
+position = Vector2(-10, 10)
+texture = ExtResource("6_if6mw")
+
+[node name="seeds_detection" type="Area2D" parent="seeds"]
+position = Vector2(-10, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="seeds/seeds_detection"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_vo3up")
 
 [connection signal="body_entered" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_entered"]
 [connection signal="body_exited" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_exited"]
+[connection signal="body_entered" from="seeds/seeds_detection" to="player" method="_on_seeds_detection_body_entered"]
+[connection signal="body_exited" from="seeds/seeds_detection" to="player" method="_on_seeds_detection_body_exited"]

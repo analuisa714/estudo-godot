@@ -10,6 +10,9 @@ var attack_ip = false
 const speed = 100
 var current_dir = "none"
 
+var skeleton_in_range = false
+var in_seeds_detection = false
+
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 
@@ -25,6 +28,17 @@ func _physics_process(delta):
 		health = 0 
 		print ("player has been killed")
 		self.queue_free()
+		
+	if in_seeds_detection == true:
+		if Input.is_action_just_pressed("ui_accept"):
+			global.found_skeletons_item = true
+	
+	if skeleton_in_range == true:
+		if Input.is_action_just_pressed("ui_accept"):
+			DialogueManager.show_example_dialogue_balloon(load("res://scripts/main.dialogue"), "main")
+			return 
+			
+			
 	
 func player_movement(delta):
 	if Input.is_action_pressed("ui_right"):
@@ -162,21 +176,23 @@ func _on_regin_timer_timeout():
 			health = 100
 	if health <= 0:
 		health = 0
+		
+
+func _on_detection_area_body_entered(body):
+	if body.has_method("skeleton"):
+		skeleton_in_range = true
 
 
+func _on_detection_area_body_exited(body):
+	if body.has_method("skeleton"):
+		skeleton_in_range = false
 
 
+func _on_seeds_detection_body_entered(body):
+	if body.has_method("player"):
+		in_seeds_detection = true
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+func _on_seeds_detection_body_exited(body):
+	if body.has_method("player"):
+		in_seeds_detection = false

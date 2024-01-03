@@ -1,0 +1,40 @@
+~ main
+
+if global.given_skeletons_item == false
+	Esqueleto: [[Oi | Olá | Oiê]]! Como eu posso te ajudar?
+	- Quem é você?
+		Esqueleto: Ah, você sabe. Um morto qualquer, nada demais.
+		Esqueleto: Um morto que consegue falar, haha.
+		- Eu acho que tenho algo para você...
+			Esqueleto: Ah! Sério?
+			- Sim, eu achei isso aqui perto. Acho que é teu.
+				if global.found_skeletons_item == true:
+					Esqueleto: Opaa, minhas sementes queridas!! Acho que eu as deixei cair. Muito obrigado!
+					set global.given_skeletons_item = true
+					=> END
+				else:
+					Esqueleto: Ah, estranho. Não, isso não é meu.
+					Esqueleto: Mas obrigado por me avisar.
+					=> END
+				- Não, tô zoando contigo => END
+			- Tchauu => END	
+	- Eu acho que tenho algo para você...
+		Esqueleto: Ah! Sério?
+		- Sim, eu achei isso aqui perto. Acho que é teu.
+			if global.found_skeletons_item == true:
+				Esqueleto: Opaa, minhas sementes queridas!! Acho que eu as deixei cair. Muito obrigado!
+				set global.given_skeletons_item = true
+			else:
+				Esqueleto: Ah, estranho. Não, isso não é meu.
+				Esqueleto: Mas obrigado por me avisar.
+				=> END
+				
+		- Não, tô zoando contigo => END
+	- Tchauu => END
+else:
+	Esqueleto: [[Oi | Olá | Oiê]], estou muito grato por você me devolver minhas sementinhas.
+	Esqueleto: Não sei o que faria sem você.
+	Esqueleto: Eu estou pensando em como te retribuir esse favor!
+	=> END
+	
+=> END

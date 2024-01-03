@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://eu1tl2n2nhuo"]
+[gd_scene load_steps=58 format=3 uid="uid://eu1tl2n2nhuo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_5p1kd"]
 [ext_resource type="Texture2D" uid="uid://c3kjrks4r3363" path="res://art/characters/player.png" id="2_egcuk"]
@@ -419,6 +419,9 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_mkts1"]
 radius = 13.0384
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8udc"]
+radius = 13.0384
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_5p1kd")
@@ -483,8 +486,16 @@ show_percentage = false
 wait_time = 5.0
 autostart = true
 
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+position = Vector2(1, -6)
+shape = SubResource("CircleShape2D_i8udc")
+
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
 [connection signal="timeout" from="regin_timer" to="." method="_on_regin_timer_timeout"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
