@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
-var health = 160
+var health = 100
 var player_alive = true
 
 var attack_ip = false
@@ -18,6 +18,7 @@ func _physics_process(delta):
 	enemy_attack() 
 	attack()
 	current_camera()
+	update_health()
 	
 	if health <= 0:
 		player_alive = false # aqui pode adicionar voltar para menu ou outra reação
@@ -100,7 +101,7 @@ func _on_player_hitbox_body_exited(body):
 		
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
-		health = health - 20
+		health = health - 10
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 		print(health)
@@ -143,4 +144,39 @@ func current_camera():
 	elif global.current_scene == "cliff_side":
 		$world_camera.enabled = false
 		$cliffside_camera.enabled = true
+
+func update_health():
+	var healthbar = $healthbar
+	
+	healthbar.value = health
+	
+	if health >= 100:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
+func _on_regin_timer_timeout():
+	if health < 100:
+		health = health + 20
+		if health > 100:
+			health = 100
+	if health <= 0:
+		health = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
